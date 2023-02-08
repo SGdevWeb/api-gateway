@@ -1,5 +1,9 @@
-const userRoute = require('./userRoute');
+const express = require('express');
+const router = express.Router();
+const testRoute = require('./testRoute');
 
-module.exports = {
-    userRoute
-};
+
+router.use(testRoute);
+
+
+module.exports = router
