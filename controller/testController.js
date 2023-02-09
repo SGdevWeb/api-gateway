@@ -1,5 +1,9 @@
 const express = require('express');
 const { validationResult } = require('express-validator');
+const axios = require('axios');
+require('dotenv').config();
+
+const userService_url = process.env.USER_SERVICE_ADDRES
 
 //test
 const testController = async (req, res) =>{
@@ -8,8 +12,13 @@ const testController = async (req, res) =>{
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        //const response = await axios.post(userRoute.USER_SERVICE_TEST, req.body);
-        const {name} = req.body;
+        const response = await axios.get('http://localhost:8010/test', {
+             data:{
+                 name : req.body.name
+                }
+            });
+            console.log(response)
+        const {name} = response.data;
         return res.status(200).json({ message: `Hello ${name}!` });
         
     } catch (error) {

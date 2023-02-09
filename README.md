@@ -1,5 +1,13 @@
 # api-gateway
 
+.env : 
+SERVER_PORT= 8000
+
+API_ADDRESS="/tree-up-api"
+USER_SERVICE_ADDRESS="http://localhost:PORT_DU_SERVICE"
+PROJECT_SERVICE_ADDRESS=""
+MEDIA_SERVICE_ADDRESS=""
+
 
 
 ## Getting started
