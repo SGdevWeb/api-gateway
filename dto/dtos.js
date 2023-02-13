@@ -1,7 +1,7 @@
-const testDTO = require('./testDTO');
-const userDTO = require('./userDTO');
+const test = require('./testDTO');
+const user = require('./userDTO');
 
 module.exports = {
-    testDTO,
-    userDTO
-};
+    test,
+    user
+}

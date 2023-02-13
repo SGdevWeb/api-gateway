@@ -1,17 +1,12 @@
-const express = require('express');
-const { validationResult } = require('express-validator');
 const axios = require('axios');
 require('dotenv').config();
 
 const userService_url = process.env.USER_SERVICE_ADDRES
 
-//test
+//controller appeller par la route
 const testController = async (req, res) =>{
     try {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
+        //appelle axios a la route au microservice
         const response = await axios.get('http://localhost:8010/test', {
              data:{
                  name : req.body.name

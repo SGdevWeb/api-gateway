@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
 require('dotenv').config()
-const { testDTO } = require('../dto/dtos')
+const DTO = require('../dto/dtos')
 const { testController } = require('../controller/controllers')
 
-// test
+// url route test microservice user
 const TREE_UP = process.env.API_ADDRESS+"/test";
 
-// test
-router.get(TREE_UP, testDTO.testDTO, testController.testController);
+// route : url , dto , controller
+router.get(TREE_UP, DTO.test, testController.testController);
 
 module.exports = router;
