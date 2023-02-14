@@ -21,6 +21,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/", route);
 
+app.use((req, res) => {
+    res.json({ message: 'Votre requête a bien été reçue' })
+})
+
 app.listen(port, ()=>{
     console.log('serveur run on port '+ port);
 });
