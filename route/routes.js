@@ -8,7 +8,7 @@ const projectRoute = require('./projectRoute')
 
 // router.use(testRoute);
 router.use(userRoute);
-router.use("/project", projectRoute);
+router.use(process.env.API_ADDRESS + "/project", projectRoute);
 
 
 module.exports = router
