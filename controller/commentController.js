@@ -1,10 +1,11 @@
 const axios = require('axios')
 
 const commentPost = async (req, res) => {
-    console.log(req.body)
+    console.log('commentPost body',req.body)
     try {
-        const response = await axios.post(`${process.env.PROJECT_SERVICE_ADDRESS}/comments/post`, {
-            comment: req.body.comment
+        const response = await axios.post(`${process.env.PROJECT_SERVICE_ADDRESS}comments/post`, {
+            comment: req.body.comment,
+            uuid_user: req.body.uuid_user
         })
         console.log('data', response.data)
         const message = response.data.message
@@ -17,7 +18,7 @@ const commentPost = async (req, res) => {
 const getAllComments = async (req, res) => {
     console.log(req.body)
     try {
-        const response = await axios.get(`${process.env.PROJECT_SERVICE_ADDRESS}/comments`)
+        const response = await axios.get(`${process.env.PROJECT_SERVICE_ADDRESS}comments`)
         console.log('data', response.data)
         const comments = response.data.comments
         return res.status(200).json({ comments: comments})
