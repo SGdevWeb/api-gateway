@@ -6,5 +6,6 @@ const DTO = require('../dto/dtos')
 const Controller = require("../controller/controllers");
 
 router.post("/create", auth, DTO.project.create, Controller.projectController.create);
+router.put("/update/:uuid", auth, DTO.project.update, Controller.projectController.update);
 
 module.exports = router;
