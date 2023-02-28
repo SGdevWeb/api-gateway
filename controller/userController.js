@@ -66,7 +66,52 @@ const postExperience = async (req, res) => {
         const response = await axios.post(
             `${process.env.USER_SERVICE_ADDRESS}/api/postoneexperience`,
              {
-                experience : [req.body],
+                experience : req.body,
+                user: req.auth
+             });
+             console.log(response);
+        return res.status(200).json(response.data);
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const updateExperience = async (req, res) => {
+    try {
+        const response = await axios.post(
+            `${process.env.USER_SERVICE_ADDRESS}/api/updateoneexperience`,
+             {
+                experience : req.body,
+                user: req.auth
+             });
+             console.log(response);
+        return res.status(200).json(response.data);
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const postSoft_skill = async (req, res) => {
+    try {
+        const response = await axios.post(
+            `${process.env.USER_SERVICE_ADDRESS}/api/postonesoft_skill`,
+             {
+                soft_skill : req.body,
+                user: req.auth
+             });
+             console.log(response);
+        return res.status(200).json(response.data);
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const updateSoft_skill = async (req, res) => {
+    try {
+        const response = await axios.post(
+            `${process.env.USER_SERVICE_ADDRESS}/api/updateonesoft_skill`,
+             {
+                soft_skill : req.body,
                 user: req.auth
              });
              console.log(response);
@@ -81,6 +126,9 @@ module.exports = {
     userControllerLogin,
     getAllUsers,
     getAllProfileUsers,
-    postExperience
+    postExperience,
+    postSoft_skill,
+    updateExperience,
+    updateSoft_skill
 }
 
