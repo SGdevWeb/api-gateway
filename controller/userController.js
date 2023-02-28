@@ -5,7 +5,7 @@ require('dotenv').config();
 const userControllerSignin = async (req, res) =>{
     try {
         // appel axios à la route du microservice
-        const response = await axios.post(`${process.env.USER_SERVICE_ADDRESS}api/signin`, {
+        const response = await axios.post(`${process.env.USER_SERVICE_ADDRESS}/api/signin`, {
                 email: req.body.email,
                 lastname: req.body.lastname,
                 firstname: req.body.firstname,
@@ -25,22 +25,22 @@ const userControllerSignin = async (req, res) =>{
 
 const userControllerLogin = async (req, res) =>{
     try {
-        const response = await axios.post(`${process.env.USER_SERVICE_ADDRESS}api/login`, {
+        const response = await axios.post(`${process.env.USER_SERVICE_ADDRESS}/api/login`, {
             email: req.body.email,
             password: req.body.password
         })
         const {token} = response.data;
         return res.status(200).json({ token: token })
     } catch (error) {
-        // console.log(error);
-        return res.status(500).json({ message: error.message });
+        console.log(error);
+        return res.status(500).json({ message: error.response.data });
     }
 };
 
 const getAllUsers = async (req, res) => {
     // console.log('req', req.auth)
     try {
-        const response = await axios.get(`${process.env.USER_SERVICE_ADDRESS}api/users`)
+        const response = await axios.get(`${process.env.USER_SERVICE_ADDRESS}/api/users`)
         // console.log('data', response.data)
         const users = response.data.users
         return res.status(200).json({ users : users})
@@ -52,7 +52,7 @@ const getAllUsers = async (req, res) => {
 const getAllProfileUsers = async (req, res) => {
     // console.log('req', req.auth)
     try {
-        const response = await axios.get(`${process.env.USER_SERVICE_ADDRESS}api/profiles`)
+        const response = await axios.get(`${process.env.USER_SERVICE_ADDRESS}/api/profiles`)
         // console.log('data', response.data)
         const profiles = response.data.profiles
         return res.status(200).json({ profiles : profiles})
@@ -61,10 +61,26 @@ const getAllProfileUsers = async (req, res) => {
     }
 }
 
+const postExperience = async (req, res) => {
+    try {
+        const response = await axios.post(
+            `${process.env.USER_SERVICE_ADDRESS}/api/postoneexperience`,
+             {
+                experience : [req.body],
+                user: req.auth
+             });
+             console.log(response);
+        return res.status(200).json(response.data);
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports = {
     userControllerSignin,
     userControllerLogin,
     getAllUsers,
-    getAllProfileUsers
+    getAllProfileUsers,
+    postExperience
 }
 
