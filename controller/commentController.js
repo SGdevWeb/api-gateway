@@ -8,8 +8,8 @@ const commentPost = async (req, res) => {
             uuid_user: req.body.uuid_user
         })
         console.log('data', response.data)
-        const message = response.data.message
-        return res.status(201).json({ message: message })
+        const {success} = response.data
+        return res.status(201).json( success )
     } catch (error) {
         return res.status(500).json({ message: error.message })
     }
@@ -19,9 +19,9 @@ const getAllComments = async (req, res) => {
     console.log(req.body)
     try {
         const response = await axios.get(`${process.env.PROJECT_SERVICE_ADDRESS}comments`)
-        console.log('data', response.data)
-        const comments = response.data.comments
-        return res.status(200).json({ comments: comments})
+        console.log('data getAllComments', response.data)
+        const {success} = response.data
+        return res.status(200).json(success)
     } catch(error) {
         return res.status(500).json({ message: error.message })
     }
