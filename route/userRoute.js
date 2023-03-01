@@ -18,6 +18,6 @@ router.post(LOGIN, userController.userControllerLogin);
 
 router.get(USERS, auth, userController.getAllUsers);
 
-router.get(USER, userController.getUser);
+router.get(USER,auth , userController.getUser);
 
 module.exports = router;
