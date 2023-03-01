@@ -121,6 +121,18 @@ const updateSoft_skill = async (req, res) => {
     }
 }
 
+const getProfileUser = async (req, res) => {
+    try {
+        const response = await axios.get(
+            `${process.env.USER_SERVICE_ADDRESS}/api/userprofile/${req.auth.userId}`);
+             console.log(response);
+        return res.status(200).json(response.data);
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
 module.exports = {
     userControllerSignin,
     userControllerLogin,
@@ -129,6 +141,7 @@ module.exports = {
     postExperience,
     postSoft_skill,
     updateExperience,
-    updateSoft_skill
+    updateSoft_skill,
+    getProfileUser
 }
 

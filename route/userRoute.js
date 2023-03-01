@@ -10,6 +10,7 @@ const TREE_UP = process.env.API_ADDRESS+"/newuser";
 const LOGIN = process.env.API_ADDRESS+"/login";
 const USERS = process.env.API_ADDRESS+"/users";
 const PROFILES = process.env.API_ADDRESS+"/profiles";
+const PROFILE = process.env.API_ADDRESS+"/getprofile";
 
 const NEWEXPERIENCE = process.env.API_ADDRESS+"/newexperience";
 const UPDATEEXPERIENCE = process.env.API_ADDRESS+"/updateexperience";
@@ -33,6 +34,8 @@ router.post(UPDATEEXPERIENCE, auth, DTO.userUpdateExperience, userController.upd
 router.post(NEWSOFTSKILL, auth, DTO.userNewSoft_skill, userController.postSoft_skill);
 
 router.post(UPDATESOFTSKILL, auth, DTO.userUpdateSoft_skill, userController.updateSoft_skill);
+
+router.get(PROFILE, auth, userController.getProfileUser)
 
 
 
