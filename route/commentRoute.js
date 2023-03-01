@@ -4,25 +4,16 @@ require('dotenv').config()
 const { commentController } = require('../controller/controllers');
 const auth = require('../middleware/auth')
 
-// url route microservice project
-const COMMENTS = process.env.API_ADDRESS+"/comments";
-const COMMENT = process.env.API_ADDRESS+"/comments/comment"
-
-// route : url , dto , controller
-router.post(COMMENTS, auth, commentController.commentPost);
-
-router.get(COMMENTS, commentController.getAllComments);
-
-router.put(COMMENT, auth, commentController.updateComment)
+const API = process.env.API_ADDRESS
 
 
-router.post("/comments", auth, commentController.commentPost);
+router.post(API+"/comments", auth, commentController.commentPost);
 
-router.get("/comments", commentController.getAllComments);
+router.get(API+"/comments", commentController.getAllComments);
 
-router.put("/comments", auth, commentController.updateComment)
+router.put(API+"/comments", auth, commentController.updateComment)
 
-router.get("/comments/:id", auth, commentController.getCommentByProjectId)
+router.get(API+"/comments/:id", commentController.getCommentByProjectId)
 
 
 module.exports = router;

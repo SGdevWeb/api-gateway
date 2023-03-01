@@ -31,6 +31,18 @@ const getAllComments = async (req, res) => {
     }
 }
 
+const getCommentByProjectId = async (req, res) => {
+    console.log(req.params)
+    try {
+        const response = await axios.get(`${process.env.PROJECT_SERVICE_ADDRESS}comments/comment/${req.params.id}`)
+        console.log('data getAllComments', response.data)
+        const {success} = response.data
+        return res.status(200).json(success)
+    } catch(error) {
+        return res.status(500).json({ message: error.message })
+    }
+}
+
 const updateComment = async (req, res) => {
     // console.log('body', req.body)
     // console.log('auth', req.auth)
@@ -50,4 +62,5 @@ module.exports = {
     commentPost,
     getAllComments,
     updateComment,
+    getCommentByProjectId,
 }

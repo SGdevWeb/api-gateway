@@ -7,8 +7,4 @@ const Controller = require("../controller/controllers");
 
 router.post("/create", auth, DTO.project.create, Controller.projectController.create);
 
-<<<<<<< HEAD
 module.exports = router;
-=======
-module.exports = router;
->>>>>>> dev
