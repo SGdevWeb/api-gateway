@@ -41,7 +41,7 @@ const getAllUsers = async (req, res) => {
     // console.log('req', req.auth)
     try {
         const response = await axios.get('http://localhost:8010/api/users')
-        console.log('data', response.data)
+        // console.log('data', response.data)
         const users = response.data.users
         return res.status(200).json({ users : users})
     } catch (error) {
