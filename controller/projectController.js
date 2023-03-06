@@ -10,6 +10,16 @@ const create = async (req, res) => {
     }
 };
 
+const get = async (req, res) => {
+    try {
+        const response = await axios.get(process.env.PROJECT_SERVICE_ADDRESS + "/project/" + req.params.uuid);
+        return res.status(response.status).send(response.data.success);
+    } catch (error) {
+        return res.status(error.response ? error.response.status : 500).json({ message: error.response ? error.response.data : error.message });
+    }
+};
+
 module.exports = {
     create,
+    get,
 }
