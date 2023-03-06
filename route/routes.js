@@ -5,10 +5,14 @@ const router = express.Router();
 const userRoute = require('./userRoute')
 const projectRoute = require('./projectRoute')
 const commentRoute = require('./commentRoute')
+const collaboratorsRoute = require('./collaboratorsRoute')
+
 
 // router.use(testRoute);
 router.use(userRoute);
 router.use(process.env.API_ADDRESS + "/project", projectRoute);
 router.use(commentRoute);
+router.use(process.env.API_ADDRESS + "/collaborators", collaboratorsRoute);
+
 
 module.exports = router
