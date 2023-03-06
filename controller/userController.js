@@ -1,36 +1,40 @@
-const axios = require('axios');
-require('dotenv').config();
+const axios = require("axios");
+require("dotenv").config();
 
 // controller appellé par la route
-const userControllerSignin = async (req, res) =>{
+const userControllerSignin = async (req, res) => {
     try {
         // appel axios à la route du microservice
-        const response = await axios.post(`${process.env.USER_SERVICE_ADDRESS}api/signin`, {
+        const response = await axios.post(
+            `${process.env.USER_SERVICE_ADDRESS}api/signin`,
+            {
                 email: req.body.email,
                 lastname: req.body.lastname,
                 firstname: req.body.firstname,
                 username: req.body.username,
                 password: req.body.password,
-                role: "user"
+                role: "user",
             }
         );
-        const {message} = response.data;
-        return res.status(200).json({ message : message });
-        
+        const { message } = response.data;
+        return res.status(200).json({ message: message });
     } catch (error) {
         // console.log(error);
         return res.status(500).json({ message: error.message });
     }
 };
 
-const userControllerLogin = async (req, res) =>{
+const userControllerLogin = async (req, res) => {
     try {
-        const response = await axios.post(`${process.env.USER_SERVICE_ADDRESS}api/login`, {
-            email: req.body.email,
-            password: req.body.password
-        })
-        const {token} = response.data;
-        return res.status(200).json({ token: token })
+        const response = await axios.post(
+            `${process.env.USER_SERVICE_ADDRESS}api/login`,
+            {
+                email: req.body.email,
+                password: req.body.password,
+            }
+        );
+        const { token } = response.data;
+        return res.status(200).json({ token: token });
     } catch (error) {
         // console.log(error);
         return res.status(500).json({ message: error.message });
@@ -40,31 +44,49 @@ const userControllerLogin = async (req, res) =>{
 const getAllUsers = async (req, res) => {
     // console.log('req', req.auth)
     try {
-        const response = await axios.get(`${process.env.USER_SERVICE_ADDRESS}api/users`)
+        const response = await axios.get(
+            `${process.env.USER_SERVICE_ADDRESS}api/users`
+        );
         // console.log('data', response.data)
-        const users = response.data.users
-        return res.status(200).json({ users : users})
+        const users = response.data.users;
+        return res.status(200).json({ users: users });
     } catch (error) {
-        return res.status(500).json({ message: error.message })
+        return res.status(500).json({ message: error.message });
     }
-}
+};
 
 const getAllProfileUsers = async (req, res) => {
     // console.log('req', req.auth)
     try {
-        const response = await axios.get(`${process.env.USER_SERVICE_ADDRESS}api/profiles`)
+        const response = await axios.get(
+            `${process.env.USER_SERVICE_ADDRESS}api/profiles`
+        );
         // console.log('data', response.data)
-        const profiles = response.data.profiles
-        return res.status(200).json({ profiles : profiles})
+        const profiles = response.data.profiles;
+        return res.status(200).json({ profiles: profiles });
     } catch (error) {
-        return res.status(500).json({ message: error.message })
+        return res.status(500).json({ message: error.message });
     }
-}
+};
+
+const getUser = async (req, res) => {
+    console.log(req.params);
+    try {
+        const response = await axios.get(
+            `${process.env.USER_SERVICE_ADDRESS}api/users/${req.params.id}`
+        );
+        console.log("data getUser", response.data);
+        const { user } = response.data;
+        return res.status(200).json(user);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+};
 
 module.exports = {
     userControllerSignin,
     userControllerLogin,
     getAllUsers,
-    getAllProfileUsers
-}
-
+    getAllProfileUsers,
+    getUser,
+};
