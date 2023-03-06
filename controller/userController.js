@@ -69,7 +69,6 @@ const postExperience = async (req, res) => {
                 experience : req.body,
                 user: req.auth
              });
-             console.log(response);
         return res.status(200).json(response.data);
     } catch (error) {
         console.log(error)
@@ -84,7 +83,20 @@ const updateExperience = async (req, res) => {
                 experience : req.body,
                 user: req.auth
              });
-             console.log(response);
+        return res.status(200).json(response.data);
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const deleteExperience = async (req, res) => {
+    try {
+        const response = await axios.post(
+            `${process.env.USER_SERVICE_ADDRESS}/api/deleteoneexperience`,
+             {
+                uuid_experience : req.body.uuid,
+                user: req.auth
+             });
         return res.status(200).json(response.data);
     } catch (error) {
         console.log(error)
@@ -99,7 +111,6 @@ const postSoft_skill = async (req, res) => {
                 soft_skill : req.body,
                 user: req.auth
              });
-             console.log(response);
         return res.status(200).json(response.data);
     } catch (error) {
         console.log(error)
@@ -115,6 +126,20 @@ const updateSoft_skill = async (req, res) => {
                 user: req.auth
              });
              console.log(response);
+        return res.status(200).json(response.data);
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const deleteSoft_skill = async (req, res) => {
+    try {
+        const response = await axios.post(
+            `${process.env.USER_SERVICE_ADDRESS}/api/deleteonesoft_skill`,
+             {
+                uuid_soft_skill : req.body.uuid,
+                user: req.auth
+             });
         return res.status(200).json(response.data);
     } catch (error) {
         console.log(error)
@@ -142,6 +167,8 @@ module.exports = {
     postSoft_skill,
     updateExperience,
     updateSoft_skill,
-    getProfileUser
+    getProfileUser,
+    deleteExperience,
+    deleteSoft_skill
 }
 

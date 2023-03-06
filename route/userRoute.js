@@ -14,9 +14,11 @@ const PROFILE = process.env.API_ADDRESS+"/getprofile";
 
 const NEWEXPERIENCE = process.env.API_ADDRESS+"/newexperience";
 const UPDATEEXPERIENCE = process.env.API_ADDRESS+"/updateexperience";
+const DELETEEXPERIENCE = process.env.API_ADDRESS+"/deleteexperience";
 
 const NEWSOFTSKILL = process.env.API_ADDRESS+"/newsoftskill";
 const UPDATESOFTSKILL = process.env.API_ADDRESS+"/updatesoftskill"
+const DELETESOFTSKILL = process.env.API_ADDRESS+"/deletesoftskill"
 
 // route : url , dto , controller
 router.post(TREE_UP, userController.userControllerSignin);
@@ -31,9 +33,13 @@ router.post(NEWEXPERIENCE, auth, DTO.userNewExperience, userController.postExper
 
 router.post(UPDATEEXPERIENCE, auth, DTO.userUpdateExperience, userController.updateExperience);
 
+router.post(DELETEEXPERIENCE, auth, DTO.userDeleteExperience, userController.deleteExperience);
+
 router.post(NEWSOFTSKILL, auth, DTO.userNewSoft_skill, userController.postSoft_skill);
 
 router.post(UPDATESOFTSKILL, auth, DTO.userUpdateSoft_skill, userController.updateSoft_skill);
+
+router.post(DELETESOFTSKILL, auth, DTO.userDeleteSoft_skill, userController.deleteSoft_skill);
 
 router.get(PROFILE, auth, userController.getProfileUser)
 

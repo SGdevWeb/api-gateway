@@ -2,7 +2,7 @@ const Joi = require('joi');
 const schemaValidator = require('../../../middleware/testMiddleware');
 
 //shema de de verification des donner en entré de la route
-function newExperienceSchema(req, res, next){
+function UpdateExperienceSchema(req, res, next){
     const experienceSchema = Joi.object({
         name : Joi.string().required().min(3).max(40),
         date_start: Joi.date().iso().required(),
@@ -15,4 +15,4 @@ function newExperienceSchema(req, res, next){
     schemaValidator(req, experienceSchema, next);
 }
 
-module.exports = newExperienceSchema;
+module.exports = UpdateExperienceSchema;
