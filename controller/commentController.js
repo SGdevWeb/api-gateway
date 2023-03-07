@@ -49,8 +49,8 @@ const getCommentByProjectId = async (req, res) => {
 };
 
 const updateComment = async (req, res) => {
-  console.log("body", req.body);
-  // console.log('auth', req.auth)
+  // console.log("body", req.body);
+  // console.log("auth", req.auth);
   try {
     const response = await axios.put(
       `${process.env.PROJECT_SERVICE_ADDRESS}/comments/comment`,
