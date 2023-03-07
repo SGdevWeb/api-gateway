@@ -19,6 +19,7 @@ const DELETEEXPERIENCE = process.env.API_ADDRESS+"/deleteexperience";
 const NEWSOFTSKILL = process.env.API_ADDRESS+"/newsoftskill";
 const UPDATESOFTSKILL = process.env.API_ADDRESS+"/updatesoftskill"
 const DELETESOFTSKILL = process.env.API_ADDRESS+"/deletesoftskill"
+const USER = process.env.API_ADDRESS+"/user/:userId";
 
 // route : url , dto , controller
 router.post(TREE_UP, userController.userControllerSignin);
@@ -44,5 +45,6 @@ router.post(DELETESOFTSKILL, auth, DTO.userDeleteSoft_skill, userController.dele
 router.get(PROFILE, auth, userController.getProfileUser)
 
 
+router.get(USER,auth , userController.getUser);
 
 module.exports = router;

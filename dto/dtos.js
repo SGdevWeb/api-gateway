@@ -1,5 +1,7 @@
 const test = require('./testDTO');
 const user = require('./userDTO');
+const project = require('./projectDTO');
+const collaborators = require("./collaboratorsDTO")
 
 const userNewExperience = require('./user_ServiceDTO/experienceDTO/newExperienceDTO');
 const userUpdateExperience = require('./user_ServiceDTO/experienceDTO/updateExperience');
@@ -18,4 +20,6 @@ module.exports = {
     userNewSoft_skill,
     userUpdateSoft_skill,
     userDeleteSoft_skill,
+    project,
+    collaborators,
 }

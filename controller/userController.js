@@ -60,6 +60,19 @@ const getAllProfileUsers = async (req, res) => {
         return res.status(500).json({ message: error.message })
     }
 }
+const getUser = async (req, res) => {
+    // console.log('entra la peticion', req.params.userId)
+    
+    try {
+        const userId = req.params.userId;
+        // console.log('user id: ',userId);
+        const response = await axios.get(`http://localhost:8010/api/user/${userId}`);
+        const user = response.data.users;
+        return res.status(200).json({ user });
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+};
 
 const postExperience = async (req, res) => {
     try {
@@ -169,6 +182,7 @@ module.exports = {
     updateSoft_skill,
     getProfileUser,
     deleteExperience,
-    deleteSoft_skill
+    deleteSoft_skill,
+    getUser,
 }
 
