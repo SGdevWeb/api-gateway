@@ -67,17 +67,17 @@ const getAllProfileUsers = async (req, res) => {
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
-};
+}
 
 const getUser = async (req, res) => {
-    console.log(req.params);
+    // console.log('entra la peticion', req.params.userId)
+    
     try {
-        const response = await axios.get(
-            `${process.env.USER_SERVICE_ADDRESS}api/users/${req.params.id}`
-        );
-        console.log("data getUser", response.data);
-        const { user } = response.data;
-        return res.status(200).json(user);
+        const userId = req.params.userId;
+        // console.log('user id: ',userId);
+        const response = await axios.get(`http://localhost:8010/api/user/${userId}`);
+        const user = response.data.users;
+        return res.status(200).json({ user });
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }

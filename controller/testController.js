@@ -12,12 +12,12 @@ const testController = async (req, res) =>{
                  name : req.body.name
                 }
             });
-            console.log(response)
+            // console.log(response)
         const {name} = response.data;
         return res.status(200).json({ message: `Hello ${name}!` });
         
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         return res.status(500).json({ message: error.message });
     }
 };
