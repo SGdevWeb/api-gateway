@@ -38,7 +38,7 @@ const getCommentByProjectId = async (req, res) => {
   // console.log(req.params);
   try {
     const response = await axios.get(
-      `${process.env.PROJECT_SERVICE_ADDRESS}/comments/comment/${req.params.id}`
+      `${process.env.PROJECT_SERVICE_ADDRESS}/comments/comment/${req.params.uuid}`
     );
     // console.log("data getAllCommentsById", response.data);
     const { success } = response.data;
@@ -67,9 +67,30 @@ const updateComment = async (req, res) => {
   }
 };
 
+const deleteComment = async (req, res) => {
+  console.log("deleteComment auth", req.auth);
+  console.log("params", req.params);
+  try {
+    const response = await axios.delete(
+      `${process.env.PROJECT_SERVICE_ADDRESS}/comments/comment/${req.params.uuid}`,
+      {
+        data: {
+          uuid_user: req.auth.user.uuid,
+        },
+      }
+    );
+    console.log("response commentController apigateway", response);
+    const { message } = response.data;
+    return res.status(200).json({ message });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   commentPost,
   getAllComments,
   updateComment,
   getCommentByProjectId,
+  deleteComment,
 };
