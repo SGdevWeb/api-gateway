@@ -20,6 +20,8 @@ const NEWSOFTSKILL = process.env.API_ADDRESS+"/newsoftskill";
 const UPDATESOFTSKILL = process.env.API_ADDRESS+"/updatesoftskill"
 const DELETESOFTSKILL = process.env.API_ADDRESS+"/deletesoftskill"
 
+const UPDATEPROFILE = process.env.API_ADDRESS+"/updateuser"
+
 // route : url , dto , controller
 router.post(TREE_UP, userController.userControllerSignin);
 
@@ -41,7 +43,9 @@ router.post(UPDATESOFTSKILL, auth, DTO.userUpdateSoft_skill, userController.upda
 
 router.post(DELETESOFTSKILL, auth, DTO.userDeleteSoft_skill, userController.deleteSoft_skill);
 
-router.get(PROFILE, auth, userController.getProfileUser)
+router.get(PROFILE, auth, userController.getProfileUser);
+
+router.put(UPDATEPROFILE,auth, DTO.userUpdate, userController.update_profile);
 
 
 

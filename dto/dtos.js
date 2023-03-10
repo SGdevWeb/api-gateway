@@ -9,6 +9,8 @@ const userNewSoft_skill = require('./user_ServiceDTO/soft_skillDTO/newSoft_skill
 const userUpdateSoft_skill = require('./user_ServiceDTO/soft_skillDTO/updateSoftskill');
 const userDeleteSoft_skill = require('./user_ServiceDTO/soft_skillDTO/deleteSoft_skillDTO');
 
+const userUpdate = require('./user_ServiceDTO/profileDTO/updateProfile')
+
 module.exports = {
     test,
     user,
@@ -18,4 +20,5 @@ module.exports = {
     userNewSoft_skill,
     userUpdateSoft_skill,
     userDeleteSoft_skill,
+    userUpdate
 }
