@@ -22,10 +22,7 @@ module.exports = {
     userNewSoft_skill,
     userUpdateSoft_skill,
     userDeleteSoft_skill,
-<<<<<<< HEAD
     project,
     collaborators,
-=======
     userUpdate
->>>>>>> 86d454e148027f7c76b5a448426bab00e417fc34
 }
