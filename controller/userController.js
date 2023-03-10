@@ -170,6 +170,24 @@ const getProfileUser = async (req, res) => {
     }
 }
 
+const update_profile = async (req, res) => {
+    try {
+        const response = await axios.put(
+            `${process.env.USER_SERVICE_ADDRESS}/api/updateuser/${req.auth.userId}`,
+             {
+                user_profile : req.body,
+                user: req.auth
+             });
+             console.log(response);
+        return res.status(200).json(response.data);
+    } catch (error) {
+        console.log(error.response);
+        return res.status(500).json({ message: error.response.data });
+    }
+}
+
+
+
 module.exports = {
     userControllerSignin,
     userControllerLogin,
@@ -183,5 +201,6 @@ module.exports = {
     deleteExperience,
     deleteSoft_skill,
     getUser,
+    update_profile
 }
 
