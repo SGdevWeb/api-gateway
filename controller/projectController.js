@@ -3,7 +3,7 @@ require("dotenv").config();
 
 const create = async (req, res) => {
     try {
-        const response = await axios.post(process.env.PROJECT_SERVICE_ADDRESS + "/project/create", { ...req.body, user: req.auth });
+        const response = await axios.post(process.env.PROJECT_SERVICE_ADDRESS + "/project/create", { ...req.body, uuid_user: req.auth.user.uuid });
         return res.status(response.status).send(response.data.success);
     } catch (error) {
         return res.status(error.response ? error.response.status : 500).json({ message: error.response ? error.response.data : error.message });
