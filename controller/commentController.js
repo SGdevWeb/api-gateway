@@ -83,7 +83,9 @@ const deleteComment = async (req, res) => {
     const { message } = response.data;
     return res.status(200).json({ message });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    const { message } = error.response.data;
+    const { status } = error.response;
+    return res.status(status).json({ message });
   }
 };
 

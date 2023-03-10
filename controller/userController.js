@@ -19,7 +19,10 @@ const userControllerSignin = async (req, res) => {
     const { message } = response.data;
     return res.status(200).json({ message: message });
   } catch (error) {
-    // console.log(error);
+    if (error.response) {
+      const { status, data } = error.response;
+      return res.status(status).json({ message: data.message });
+    }
     return res.status(500).json({ message: error.message });
   }
 };
@@ -36,7 +39,11 @@ const userControllerLogin = async (req, res) => {
     const { token } = response.data;
     return res.status(200).json({ token: token });
   } catch (error) {
-    // console.log(error);
+    console.log("userController", error);
+    if (error.response) {
+      const { status, data } = error.response;
+      return res.status(status).json({ message: data.message });
+    }
     return res.status(500).json({ message: error.message });
   }
 };
@@ -49,8 +56,12 @@ const getAllUsers = async (req, res) => {
     );
     // console.log('data', response.data)
     const users = response.data.users;
-    return res.status(200).json({ users: users });
+    return res.status(200).json({ users });
   } catch (error) {
+    if (error.response) {
+      const { status, data } = error.response;
+      return res.status(status).json({ message: data.message });
+    }
     return res.status(500).json({ message: error.message });
   }
 };
@@ -62,9 +73,13 @@ const getAllProfileUsers = async (req, res) => {
       `${process.env.USER_SERVICE_ADDRESS}/api/profiles`
     );
     // console.log('data', response.data)
-    const profiles = response.data.profiles;
-    return res.status(200).json({ profiles: profiles });
+    const profileUsers = response.data.profileUsers;
+    return res.status(200).json({ profileUsers });
   } catch (error) {
+    if (error.response) {
+      const { status, data } = error.response;
+      return res.status(status).json({ message: data.message });
+    }
     return res.status(500).json({ message: error.message });
   }
 };
@@ -81,6 +96,10 @@ const getUser = async (req, res) => {
     const user = response.data.user;
     return res.status(200).json({ user });
   } catch (error) {
+    if (error.response) {
+      const { status, data } = error.response;
+      return res.status(status).json({ message: data.message });
+    }
     return res.status(500).json({ message: error.message });
   }
 };
