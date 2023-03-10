@@ -64,7 +64,7 @@ const getUser = async (req, res) => {
     // console.log('entra la peticion', req.params.userId)
     
     try {
-        const userId = req.params.userId;
+        const userId = req.params.user;
         // console.log('user id: ',userId);
         const response = await axios.get(`http://localhost:8010/api/user/${userId}`);
         const user = response.data.users;
@@ -162,14 +162,13 @@ const deleteSoft_skill = async (req, res) => {
 const getProfileUser = async (req, res) => {
     try {
         const response = await axios.get(
-            `${process.env.USER_SERVICE_ADDRESS}/api/userprofile/${req.auth.userId}`);
+            `${process.env.USER_SERVICE_ADDRESS}/api/userprofile/${req.auth.user}`);
              console.log(response);
         return res.status(200).json(response.data);
     } catch (error) {
         console.log(error)
     }
 }
-
 
 module.exports = {
     userControllerSignin,
