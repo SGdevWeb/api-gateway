@@ -14,13 +14,13 @@ const update = async (req, res) => {
   try {
     const { uuid } = req.params;
     const response = await axios.put(
-      process.env.PROJECT_SERVICE_ADDRESS + "/project/update/" + uuid,  { ...req.body, user: req.auth }
+      process.env.PROJECT_SERVICE_ADDRESS + "/project/update/" + uuid,  { ...req.body, user: req.auth.user.uuid }
     );
     return res.status(response.status).send(response.data.success);
   } catch (error) {
     return res
       .status(error.response ? error.response.status : 500)
-      .json({ message: error });
+      .json({ message: error.response ? error.response.data : error.message });
   }
 };
 
