@@ -1,8 +1,8 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-require('dotenv').config()
-const auth = require('../middleware/auth');
-const DTO = require('../dto/dtos')
+require("dotenv").config();
+const auth = require("../middleware/auth");
+const DTO = require("../dto/dtos");
 const Controller = require("../controller/controllers");
 
 

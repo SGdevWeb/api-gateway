@@ -1,9 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-require('dotenv').config()
-const DTO = require('../dto/dtos')
-const { userController } = require('../controller/controllers');
-const auth = require('../middleware/auth');
+require("dotenv").config();
+const DTO = require("../dto/dtos");
+const { userController } = require("../controller/controllers");
+const auth = require("../middleware/auth");
 
 // url route microservice user
 const TREE_UP = process.env.API_ADDRESS+"/newuser";
@@ -50,5 +50,6 @@ router.put(UPDATEPROFILE,auth, DTO.userUpdate, userController.update_profile);
 
 
 router.get(USER,auth , userController.getUser);
+router.get(USERS + "/:uuid", auth, userController.getUser);
 
 module.exports = router;
