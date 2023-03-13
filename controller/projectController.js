@@ -14,7 +14,7 @@ const update = async (req, res) => {
   try {
     const { uuid } = req.params;
     const response = await axios.put(
-      process.env.PROJECT_SERVICE_ADDRESS + "/project/update/" + uuid,  { ...req.body, user: req.auth.user.uuid }
+      process.env.PROJECT_SERVICE_ADDRESS + "/project/update/" + uuid,  { ...req.body, uuid_user: req.auth.user.uuid }
     );
     return res.status(response.status).send(response.data.success);
   } catch (error) {
