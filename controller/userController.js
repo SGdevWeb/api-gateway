@@ -86,13 +86,14 @@ const getAllProfileUsers = async (req, res) => {
 
 const getUser = async (req, res) => {
   // console.log('entra la peticion', req.params.userId)
-  // console.log(req.params);
+  console.log(req.params);
   try {
     const { uuid } = req.params;
     // console.log('user id: ',userId);
     const response = await axios.get(
       `${process.env.USER_SERVICE_ADDRESS}/api/users/${uuid}`
     );
+    console.log(response);
     const user = response.data.user;
     return res.status(200).json({ user });
   } catch (error) {
