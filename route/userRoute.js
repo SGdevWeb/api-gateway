@@ -52,4 +52,5 @@ router.put(UPDATEPROFILE,auth, DTO.userUpdate, userController.update_profile);
 router.get(USER,auth , userController.getUser);
 router.get(USERS + "/:uuid", auth, userController.getUser);
 
+
 module.exports = router;
