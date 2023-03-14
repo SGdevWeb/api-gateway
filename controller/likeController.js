@@ -11,7 +11,7 @@ const postLikeController = async (req, res) => {
              });
         return res.status(200).json(response.data);
     } catch (error) {
-        console.log(error)
+        //console.log(error)
     }
 }
 

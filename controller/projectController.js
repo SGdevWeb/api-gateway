@@ -35,6 +35,7 @@ const get = async (req, res) => {
     const response = await axios.get(
       process.env.PROJECT_SERVICE_ADDRESS + "/project/" + req.params.uuid
     );
+    response.data.success.countLikes = response.data.countLikes
     return res.status(response.status).send(response.data.success);
   } catch (error) {
     return res
