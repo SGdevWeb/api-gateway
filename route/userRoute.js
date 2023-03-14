@@ -20,6 +20,6 @@ router.get(USERS, auth, userController.getAllUsers);
 
 router.get(PROFILES, auth, userController.getAllProfileUsers);
 
-router.get(USERS + "/:uuid", auth, userController.getUser);
+router.get(USERS + "/:uuid", userController.getUser);
 
 module.exports = router;
