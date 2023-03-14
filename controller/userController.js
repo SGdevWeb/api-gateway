@@ -22,8 +22,7 @@ const userControllerSignin = async (req, res) => {
         return res.status(500).json({ message: error.message });
     }
     return res.status(500).json({ message: error.message });
-  }
-};
+  };
 
 const userControllerLogin = async (req, res) => {
     try {
@@ -38,8 +37,7 @@ const userControllerLogin = async (req, res) => {
         return res.status(500).json({ message: error.response.data });
     }
     return res.status(500).json({ message: error.message });
-  }
-};
+  };
 
 const getAllUsers = async (req, res) => {
     // console.log('req', req.auth)
@@ -52,8 +50,7 @@ const getAllUsers = async (req, res) => {
         return res.status(500).json({ message: error.message })
     }
     return res.status(500).json({ message: error.message });
-  }
-};
+  };
 
 const getAllProfileUsers = async (req, res) => {
     // console.log('req', req.auth)
@@ -66,8 +63,7 @@ const getAllProfileUsers = async (req, res) => {
         return res.status(500).json({ message: error.message })
     }
     return res.status(500).json({ message: error.message });
-  }
-};
+  };
 
 const getUser = async (req, res) => {
     // console.log('entra la peticion', req.params.userId)
@@ -82,8 +78,8 @@ const getUser = async (req, res) => {
         return res.status(500).json({ message: error.message });
     }
     return res.status(500).json({ message: error.message });
-  }
-};
+  };
+
 
 const postExperience = async (req, res) => {
     try {
@@ -174,7 +170,6 @@ const getProfileUser = async (req, res) => {
     try {
         const response = await axios.get(
             `${process.env.USER_SERVICE_ADDRESS}/api/userprofile/${req.auth.user.uuid}`);
-        console.log(response);
         return res.status(200).json(response.data);
     } catch (error) {
         console.log(error.response);
