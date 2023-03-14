@@ -51,4 +51,6 @@ router.put(UPDATEPROFILE,auth, DTO.userUpdate, userController.update_profile);
 
 router.get(USER,auth , userController.getUser);
 
+router.post(NEWEXPERIENCE, auth, DTO.userNewExperience, userController.postExperience )
+
 module.exports = router;
