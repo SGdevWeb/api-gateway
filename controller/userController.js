@@ -5,80 +5,106 @@ require("dotenv").config();
 const userControllerSignin = async (req, res) => {
     try {
         // appel axios à la route du microservice
-        const response = await axios.post(`${process.env.USER_SERVICE_ADDRESS}/api/signin`, {
-            email: req.body.email,
-            lastname: req.body.lastname,
-            firstname: req.body.firstname,
-            username: req.body.username,
-            password: req.body.password,
-            role: "user"
-        }
+        const response = await axios.post(
+            `${process.env.USER_SERVICE_ADDRESS}/api/signin`,
+            {
+                email: req.body.email,
+                lastname: req.body.lastname,
+                firstname: req.body.firstname,
+                username: req.body.username,
+                password: req.body.password,
+                role: "user",
+            }
         );
         const { message } = response.data;
         return res.status(200).json({ message: message });
-
     } catch (error) {
-        // console.log(error);
+        if (error.response) {
+            const { status, data } = error.response;
+            return res.status(status).json({ message: data.message });
+        }
         return res.status(500).json({ message: error.message });
     }
-    return res.status(500).json({ message: error.message });
-  };
+};
+
 
 const userControllerLogin = async (req, res) => {
     try {
-        const response = await axios.post(`${process.env.USER_SERVICE_ADDRESS}/api/login`, {
-            email: req.body.email,
-            password: req.body.password
-        })
+        const response = await axios.post(
+            `${process.env.USER_SERVICE_ADDRESS}/api/login`,
+            {
+                email: req.body.email,
+                password: req.body.password,
+            }
+        );
         const { token } = response.data;
-        return res.status(200).json({ token: token })
+        return res.status(200).json({ token: token });
     } catch (error) {
-        console.log(error);
-        return res.status(500).json({ message: error.response.data });
+        if (error.response) {
+            const { status, data } = error.response;
+            return res.status(status).json({ message: data.message });
+        }
+        return res.status(500).json({ message: error.message });
     }
-    return res.status(500).json({ message: error.message });
-  };
+};
+
 
 const getAllUsers = async (req, res) => {
     // console.log('req', req.auth)
     try {
-        const response = await axios.get(`${process.env.USER_SERVICE_ADDRESS}/api/users`)
+        const response = await axios.get(
+            `${process.env.USER_SERVICE_ADDRESS}/api/users`
+        );
         // console.log('data', response.data)
-        const users = response.data.users
-        return res.status(200).json({ users: users })
+        const users = response.data.users;
+        return res.status(200).json({ users });
     } catch (error) {
-        return res.status(500).json({ message: error.message })
+        if (error.response) {
+            const { status, data } = error.response;
+            return res.status(status).json({ message: data.message });
+        }
+        return res.status(500).json({ message: error.message });
     }
-    return res.status(500).json({ message: error.message });
-  };
+};
+
 
 const getAllProfileUsers = async (req, res) => {
     // console.log('req', req.auth)
     try {
-        const response = await axios.get(`${process.env.USER_SERVICE_ADDRESS}/api/profiles`)
+        const response = await axios.get(
+            `${process.env.USER_SERVICE_ADDRESS}/api/profiles`
+        );
         // console.log('data', response.data)
-        const profiles = response.data.profiles
-        return res.status(200).json({ profiles: profiles })
+        const profileUsers = response.data.profileUsers;
+        return res.status(200).json({ profileUsers });
     } catch (error) {
-        return res.status(500).json({ message: error.message })
+        if (error.response) {
+            const { status, data } = error.response;
+            return res.status(status).json({ message: data.message });
+        }
+        return res.status(500).json({ message: error.message });
     }
-    return res.status(500).json({ message: error.message });
-  };
+};
 
 const getUser = async (req, res) => {
     // console.log('entra la peticion', req.params.userId)
-
     try {
-        const userId = req.params.user;
+        const { uuid } = req.params;
         // console.log('user id: ',userId);
-        const response = await axios.get(`http://localhost:8010/api/user/${userId}`);
-        const user = response.data.users;
+        const response = await axios.get(
+            `${process.env.USER_SERVICE_ADDRESS}/api/users/${uuid}`
+        );
+        const user = response.data.user;
         return res.status(200).json({ user });
     } catch (error) {
+        if (error.response) {
+            const { status, data } = error.response;
+            return res.status(status).json({ message: data.message });
+        }
         return res.status(500).json({ message: error.message });
     }
-    return res.status(500).json({ message: error.message });
-  };
+};
+
 
 
 const postExperience = async (req, res) => {
@@ -181,9 +207,9 @@ const update_profile = async (req, res) => {
     try {
         const response = await axios.put(
             `${process.env.USER_SERVICE_ADDRESS}/api/updateuser/${req.auth.user.uuid}`,
-            {   
+            {
                 ...req.body,
-                user:req.auth.user.uuid,
+                user: req.auth.user.uuid,
             });
         return res.status(200).json(response.data);
     } catch (error) {
