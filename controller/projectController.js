@@ -32,9 +32,19 @@ const update = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    const response = await axios.get(
-      process.env.PROJECT_SERVICE_ADDRESS + "/project/" + req.params.uuid
-    );
+    console.log(req.body)
+    let response = {};
+    if (req.auth.user.uuid) {
+      response = await axios.get(
+        process.env.PROJECT_SERVICE_ADDRESS + "/project/" + req.params.uuid,
+        { uuid_user: req.auth.user.uuid }
+      );
+    } else {
+      response = await axios.get(
+        process.env.PROJECT_SERVICE_ADDRESS + "/project/" + req.params.uuid
+      );
+    }
+
     response.data.success.countLikes = response.data.countLikes
     return res.status(response.status).send(response.data.success);
   } catch (error) {

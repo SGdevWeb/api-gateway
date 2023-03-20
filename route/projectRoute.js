@@ -12,6 +12,7 @@ router.put("/update/:uuid", auth, DTO.project.update, Controller.projectControll
 
 router.get('/', Controller.projectController.getAll);
 router.get("/:uuid", DTO.project.get, Controller.projectController.get);
+router.get("/getprojectlogged:uuid", DTO.project.get, auth, Controller.projectController.get);
 router.get("/user/:uuid", DTO.project.get, Controller.projectController.getByUser);
 
 module.exports = router;
