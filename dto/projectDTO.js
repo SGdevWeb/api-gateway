@@ -6,7 +6,7 @@ const create = (req, res, next) => {
         name: Joi.string().required().min(3).max(50),
         date_start: Joi.date().required().iso(),
         date_end: Joi.date().iso(),
-        description: Joi.string().required().max(255),
+        description: Joi.string().required().min(100).max(5000),
         //type : Joi.string().required().length(32),
     });
     schemaValidator(req, joiCreateProject, next);

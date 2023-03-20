@@ -68,8 +68,8 @@ const updateComment = async (req, res) => {
 };
 
 const deleteComment = async (req, res) => {
-  console.log("deleteComment auth", req.auth);
-  console.log("params", req.params);
+  // console.log("deleteComment auth", req.auth);
+  // console.log("params", req.params);
   try {
     const response = await axios.delete(
       `${process.env.PROJECT_SERVICE_ADDRESS}/comments/comment/${req.params.uuid}`,
@@ -79,7 +79,6 @@ const deleteComment = async (req, res) => {
         },
       }
     );
-    console.log("response commentController apigateway", response);
     const { message } = response.data;
     return res.status(200).json({ message });
   } catch (error) {
