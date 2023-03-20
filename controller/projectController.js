@@ -43,11 +43,13 @@ const get = async (req, res) => {
   }
 };
 
-const getAll = async (_req, res) => {
+const getAll = async (req, res) => {
   try {
-    const response = await axios.get(
-      process.env.PROJECT_SERVICE_ADDRESS + "/project/"
+    const response = await axios.post(
+      process.env.PROJECT_SERVICE_ADDRESS + "/project/", 
+      req.body,
     );
+    
     return res.status(response.status).send(response.data.success);
   } catch (error) {
     return res

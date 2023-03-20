@@ -10,7 +10,7 @@ router.post("/create", auth, DTO.project.create, Controller.projectController.cr
 
 router.put("/update/:uuid", auth, DTO.project.update, Controller.projectController.update);
 
-router.get('/', Controller.projectController.getAll);
+router.post('/', DTO.project.getAll, Controller.projectController.getAll);
 router.get("/:uuid", DTO.project.get, Controller.projectController.get);
 router.get("/user/:uuid", DTO.project.get, Controller.projectController.getByUser);
 
