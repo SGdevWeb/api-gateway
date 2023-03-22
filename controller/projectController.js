@@ -32,20 +32,37 @@ const update = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    console.log(req.body)
-    let response = {};
-    if (req.auth.user.uuid) {
-      response = await axios.get(
-        process.env.PROJECT_SERVICE_ADDRESS + "/project/" + req.params.uuid,
-        { uuid_user: req.auth.user.uuid }
-      );
-    } else {
-      response = await axios.get(
-        process.env.PROJECT_SERVICE_ADDRESS + "/project/" + req.params.uuid
-      );
-    }
-
+    const response = await axios.get(
+      process.env.PROJECT_SERVICE_ADDRESS + "/project/" + req.params.uuid
+    );
     response.data.success.countLikes = response.data.countLikes
+    return res.status(response.status).send(response.data.success);
+  } catch (error) {
+    return res
+      .status(error.response ? error.response.status : 500)
+      .json({ message: error.response ? error.response.data : error.message });
+  }
+};
+
+const getProjectLogged = async (req, res) => {
+  try {
+    const response = await axios.get(
+      process.env.PROJECT_SERVICE_ADDRESS + "/project/" + req.params.uuid
+    );
+    response.data.success.countLikes = response.data.countLikes
+    try {
+      const liked = await axios.post(
+        `${process.env.LIKE_SERVICE_ADDRESS}/api/projectliked`,
+        {
+          user : req.auth.user,
+          uuid_project : req.params.uuid
+        }
+      );
+      response.data.success.liked = liked.data.like;
+      
+    } catch (error) {
+      console.log(error)
+    }
     return res.status(response.status).send(response.data.success);
   } catch (error) {
     return res
@@ -84,6 +101,7 @@ module.exports = {
   create,
   update,
   get,
+  getProjectLogged,
   getAll,
   getByUser,
 };
