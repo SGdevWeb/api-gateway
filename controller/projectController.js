@@ -71,10 +71,25 @@ const getByUser = async (req, res) => {
   }
 };
 
+const remove = async (req, res) => {
+  try {
+    const response = await axios.post(
+      process.env.PROJECT_SERVICE_ADDRESS + "/project/" + req.params.uuid,
+      { ...req.body, uuid_user: req.auth.user.uuid }
+    );
+    return res.status(response.status).send(response.data.success);
+  } catch (error) {
+    return res
+      .status(error.response ? error.response.status : 500)
+      .json({ message: error.response ? error.response.data : error.message });
+  }
+};
+
 module.exports = {
   create,
   update,
   get,
   getAll,
   getByUser,
+  remove,
 };

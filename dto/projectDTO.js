@@ -61,9 +61,23 @@ const getAll = (req, res, next) => {
   next();
 }
 
+const remove = (req, res, next) => {
+  const joiParams = Joi.object({
+    uuid: Joi.string().guid({ version: "uuidv4" }),
+  });
+
+  const { error: paramsError } = joiParams.validate(req.params);
+  if (paramsError) {
+      return res.status(400).json({ error: paramsError.details[0].message });
+  }
+  next();
+};
+
+
 module.exports = {
     create,
     update,
     get,
     getAll,
+    remove,
 }
