@@ -81,7 +81,7 @@ const remove = async (req, res) => {
   } catch (error) {
     return res
       .status(error.response ? error.response.status : 500)
-      .json({ message: error.response ? error.response.data : error.message });
+      .json({ message: error.response ? error.response.data.message : error.message });
   }
 };
 
