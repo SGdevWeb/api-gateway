@@ -1,7 +1,9 @@
 const test = require('./testDTO');
 const user = require('./userDTO');
 const project = require('./projectDTO');
-const collaborators = require("./collaboratorsDTO")
+const collaborators = require("./collaboratorsDTO");
+
+const postLike = require('./likeDTO/postLikeDTO');
 
 const userNewExperience = require('./user_ServiceDTO/experienceDTO/newExperienceDTO');
 const userUpdateExperience = require('./user_ServiceDTO/experienceDTO/updateExperience');
@@ -16,6 +18,7 @@ const userUpdate = require('./user_ServiceDTO/profileDTO/updateProfile')
 module.exports = {
     test,
     user,
+    postLike,
     userNewExperience,
     userUpdateExperience,
     userDeleteExperience,
