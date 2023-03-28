@@ -12,7 +12,8 @@ const USERS = process.env.API_ADDRESS + "/users";
 const USER = process.env.API_ADDRESS+"/user/:userId";
 
 const PROFILES = process.env.API_ADDRESS + "/profiles";
-const PROFILE = process.env.API_ADDRESS+"/getprofile";
+const PROFILE = process.env.API_ADDRESS+"/getprofile/:uuid";
+const PROFILEEDIT = process.env.API_ADDRESS+"/getprofileedit";
 const UPDATEPROFILE = process.env.API_ADDRESS+"/updateuser"
 
 const NEWEXPERIENCE = process.env.API_ADDRESS+"/newexperience";
@@ -46,7 +47,9 @@ router.post(UPDATESOFTSKILL, auth, DTO.userUpdateSoft_skill, userController.upda
 
 router.post(DELETESOFTSKILL, auth, DTO.userDeleteSoft_skill, userController.deleteSoft_skill);
 
-router.get(PROFILE, auth, userController.getProfileUser);
+router.get(PROFILE, userController.getProfileUser);
+
+router.get(PROFILEEDIT, auth, userController.getProfileUserEdit);
 
 router.put(UPDATEPROFILE,auth, DTO.userUpdate, userController.update_profile);
 

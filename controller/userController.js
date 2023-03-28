@@ -192,10 +192,21 @@ const deleteSoft_skill = async (req, res) => {
     }
 }
 
-const getProfileUser = async (req, res) => {
+const getProfileUserEdit = async (req, res) => {
     try {
         const response = await axios.get(
             `${process.env.USER_SERVICE_ADDRESS}/api/userprofile/${req.auth.user.uuid}`);
+        return res.status(200).json(response.data);
+    } catch (error) {
+        console.log(error.response);
+        return res.status(500).json({ message: error.response.data });
+    }
+}
+
+const getProfileUser = async (req, res) => {
+    try {
+        const response = await axios.get(
+            `${process.env.USER_SERVICE_ADDRESS}/api/userprofile/${req.params.uuid}`);
         return res.status(200).json(response.data);
     } catch (error) {
         console.log(error.response);
@@ -227,6 +238,7 @@ module.exports = {
     updateExperience,
     updateSoft_skill,
     getProfileUser,
+    getProfileUserEdit,
     deleteExperience,
     deleteSoft_skill,
     getUser,
