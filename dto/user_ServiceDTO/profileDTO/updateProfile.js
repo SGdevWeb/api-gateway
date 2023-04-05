@@ -6,7 +6,6 @@ function updateProfileSchema(req, res, next) {
 
     const updateProfileSchema = Joi.object({
         // uuid: Joi.string().required(),
-        email: Joi.string().email().lowercase(),
         lastname: Joi.string(),
         firstname: Joi.string(),
         username: Joi.string(),
