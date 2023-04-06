@@ -16,7 +16,7 @@ const postAvatarController = async (req, res) => {
         //console.log(form)
 
         const result = await axios.post(
-            `${process.env.MEDIA_SERVICE_ADDRESS}/api/postavatar/image/${req.params.uuid}/${req.params.username}`,
+            `${process.env.MEDIA_SERVICE_ADDRESS}/api/postavatar/image/${req.auth.user.uuid}/${req.auth.user.username}`,
             form,
             {
                 Headers: {

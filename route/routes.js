@@ -9,7 +9,7 @@ const projectRoute = require('./projectRoute')
 const commentRoute = require('./commentRoute')
 const collaboratorsRoute = require('./collaboratorsRoute')
 
-const mediaRoute = require('./mediaRoute');
+const avatarRoute = require('./avatarRoute');
 
 
 // router.use(testRoute);
@@ -18,7 +18,7 @@ router.use(process.env.API_ADDRESS + "/project", projectRoute);
 router.use(commentRoute);
 router.use(process.env.API_ADDRESS + "/collaborators", collaboratorsRoute);
 router.use(likeRoute)
-router.use(process.env.API_ADDRESS, mediaRoute);
+router.use(process.env.API_ADDRESS, avatarRoute);
 
 
 module.exports = router

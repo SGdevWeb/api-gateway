@@ -6,7 +6,7 @@ const { mediaController } = require("../controller/controllers");
 const auth = require("../middleware/auth");
 const upload = require('../middleware/fileUpload')
 
-router.post("/postavatar/image/:uuid/:username",upload.avatarUpload.single('image'), mediaController.postAvatarController);
+router.post("/postavatar/image",upload.avatarUpload.single('image'), auth, mediaController.postAvatarController);
 
 router.get("/getavatar/:uuid", mediaController.getAvatarController);
 
