@@ -2,12 +2,12 @@ const express = require("express");
 const router = express.Router();
 require("dotenv").config();
 const DTO = require("../dto/dtos");
-const { mediaController } = require("../controller/controllers");
+const { avatarController } = require("../controller/controllers");
 const auth = require("../middleware/auth");
 const upload = require('../middleware/fileUpload')
 
-router.post("/postavatar/image",upload.avatarUpload.single('image'), auth, mediaController.postAvatarController);
+router.post("/postavatar/image",auth,upload.avatarUpload.single('image') , avatarController.postAvatarController);
 
-router.get("/getavatar/:uuid", mediaController.getAvatarController);
+router.get("/getavatar/:uuid", avatarController.getAvatarController);
 
 module.exports = router;

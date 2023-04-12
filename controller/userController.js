@@ -38,8 +38,8 @@ const userControllerLogin = async (req, res) => {
                 password: req.body.password,
             }
         );
-        const { token } = response.data;
-        return res.status(200).json({ token: token });
+        const { token, avatar } = response.data; 
+        return res.status(200).send({ token: token, avatar : avatar });
     } catch (error) {
         if (error.response) {
             const { status, data } = error.response;
@@ -230,7 +230,7 @@ const getProfileUser = async (req, res) => {
                     responseType: 'arraybuffer'
                 }
             );
-            avatarOBJ = {
+            const avatarOBJ = {
                 data: Buffer.from(avatar.data, 'binary').toString('base64'),
                 contentType: avatar.headers['content-type']
             }

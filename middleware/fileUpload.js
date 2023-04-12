@@ -10,7 +10,7 @@ const avatarUpload = multer({
                 const name = file.originalname.split('.');
                 cb(
                     null,
-                    `${req.params.username}_${Date.now().toString()}_avatar.${name.at(-1)}`
+                    `${req.auth.user.username}_${Date.now().toString()}_avatar.${name.at(-1)}`
                 )
             }
         }
