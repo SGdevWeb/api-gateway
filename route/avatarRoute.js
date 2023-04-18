@@ -10,4 +10,6 @@ router.post("/postavatar/image",auth,upload.avatarUpload.single('image') , avata
 
 router.get("/getavatar/:uuid", avatarController.getAvatarController);
 
+router.get("/deleteavatar/",auth, avatarController.deleteAvatarController);
+
 module.exports = router;

@@ -7,7 +7,8 @@ const avatarUpload = multer({
                 cb(null, 'ressource/fileTemp');
             },
             filename : (req, file, cb) => {
-                const name = file.originalname.split('.');
+                console.log(file);
+                const name = file.mimetype.split('/');
                 cb(
                     null,
                     `${req.auth.user.username}_${Date.now().toString()}_avatar.${name.at(-1)}`

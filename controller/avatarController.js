@@ -44,15 +44,26 @@ const getAvatarController = async (req, res) => {
                 responseType: 'arraybuffer'
             }
         )
-        console.log(result.headers)
         return res.status(result.status).type(result.headers['content-type']).send(result.data);
-        //return res.status(result.status).send(result.data);
     } catch (error) {
         //console.log(error);
+    }
+}
+
+const deleteAvatarController = async (req, res) => {
+    try {
+        const result = await axios.get(
+            `${process.env.MEDIA_SERVICE_ADDRESS}/api/deleteavatar/${req.auth.user.uuid}`
+        );
+        return res.status(200).json(result.data)
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json("server error");
     }
 }
 
 module.exports = {
     postAvatarController,
     getAvatarController,
+    deleteAvatarController
 }

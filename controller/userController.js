@@ -204,11 +204,15 @@ const getProfileUserEdit = async (req, res) => {
                     responseType: 'arraybuffer'
                 }
             );
-            avatarOBJ = {
-                data: Buffer.from(avatar.data, 'binary').toString('base64'),
-                contentType: avatar.headers['content-type']
+            if(Buffer.from(avatar.data).byteLength !== 0 ) {
+                const avatarOBJ = {
+                  data: Buffer.from(avatar.data, 'binary').toString('base64'),
+                  contentType: avatar.headers['content-type']
+              }
+            return res.status(avatar.status).json({ user: response.data, avatar: avatarOBJ })
+            } else {
+                return res.status(avatar.status).json({ user: response.data, avatar: null })
             }
-            return res.send({ user: response.data, avatar: avatarOBJ });
         } catch (error) {
             console.log(error)
         }
@@ -230,11 +234,15 @@ const getProfileUser = async (req, res) => {
                     responseType: 'arraybuffer'
                 }
             );
-            const avatarOBJ = {
-                data: Buffer.from(avatar.data, 'binary').toString('base64'),
-                contentType: avatar.headers['content-type']
+            if(Buffer.from(avatar.data).byteLength !== 0 ) {
+                const avatarOBJ = {
+                  data: Buffer.from(avatar.data, 'binary').toString('base64'),
+                  contentType: avatar.headers['content-type']
+              }
+            return res.status(avatar.status).json({ user: response.data, avatar: avatarOBJ })
+            } else {
+                return res.status(avatar.status).json({ user: response.data, avatar: null })
             }
-            return res.send({ user: response.data, avatar: avatarOBJ });
         } catch (error) {
             console.log(error)
         }
