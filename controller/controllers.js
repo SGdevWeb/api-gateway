@@ -4,8 +4,10 @@ const likeController = require('./likeController')
 const projectController = require('./projectController');
 const commentController = require('./commentController');
 const collaboratorsController = require('./collaboratorsController');
+const avatarController = require('./avatarController');
 const projectTypeController = require('./projectTypeController');
 const technoController = require('./technoController');
+
 
 module.exports = {
     testController,
@@ -14,6 +16,7 @@ module.exports = {
     projectController,
     commentController,
     collaboratorsController,
+    avatarController,
     projectTypeController,
     technoController,
 };

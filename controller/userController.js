@@ -1,5 +1,6 @@
 const axios = require("axios");
 require("dotenv").config();
+const FormData = require('form-data');
 
 // controller appellé par la route
 const userControllerSignin = async (req, res) => {
@@ -37,8 +38,8 @@ const userControllerLogin = async (req, res) => {
                 password: req.body.password,
             }
         );
-        const { token } = response.data;
-        return res.status(200).json({ token: token });
+        const { token, avatar } = response.data; 
+        return res.status(200).send({ token: token, avatar : avatar });
     } catch (error) {
         if (error.response) {
             const { status, data } = error.response;
@@ -196,7 +197,26 @@ const getProfileUserEdit = async (req, res) => {
     try {
         const response = await axios.get(
             `${process.env.USER_SERVICE_ADDRESS}/api/userprofile/${req.auth.user.uuid}`);
-        return res.status(200).json(response.data);
+        try {
+            const avatar = await axios.get(
+                `${process.env.MEDIA_SERVICE_ADDRESS}/api/getavatar/${req.auth.user.uuid}/`,
+                {
+                    responseType: 'arraybuffer'
+                }
+            );
+            if(Buffer.from(avatar.data).byteLength !== 0 ) {
+                const avatarOBJ = {
+                  data: Buffer.from(avatar.data, 'binary').toString('base64'),
+                  contentType: avatar.headers['content-type']
+              }
+            return res.status(avatar.status).json({ user: response.data, avatar: avatarOBJ })
+            } else {
+                return res.status(avatar.status).json({ user: response.data, avatar: null })
+            }
+        } catch (error) {
+            console.log(error)
+        }
+        return res.status(200).json({ user: response.data, avatar: null });
     } catch (error) {
         console.log(error.response);
         return res.status(500).json({ message: error.response.data });
@@ -207,7 +227,26 @@ const getProfileUser = async (req, res) => {
     try {
         const response = await axios.get(
             `${process.env.USER_SERVICE_ADDRESS}/api/userprofile/${req.params.uuid}`);
-        return res.status(200).json(response.data);
+        try {
+            const avatar = await axios.get(
+                `${process.env.MEDIA_SERVICE_ADDRESS}/api/getavatar/${req.params.uuid}/`,
+                {
+                    responseType: 'arraybuffer'
+                }
+            );
+            if(Buffer.from(avatar.data).byteLength !== 0 ) {
+                const avatarOBJ = {
+                  data: Buffer.from(avatar.data, 'binary').toString('base64'),
+                  contentType: avatar.headers['content-type']
+              }
+            return res.status(avatar.status).json({ user: response.data, avatar: avatarOBJ })
+            } else {
+                return res.status(avatar.status).json({ user: response.data, avatar: null })
+            }
+        } catch (error) {
+            console.log(error)
+        }
+        return res.status(200).json({ user: response.data, avatar: null });
     } catch (error) {
         console.log(error.response);
         return res.status(500).json({ message: error.response.data });
