@@ -26,9 +26,9 @@ const getTechnoUuid = async (req, res) => {
      const { uuid } = req.params;
      // console.log('user id: ',userId);
      const response = await axios.get(
-         `${process.env.USER_SERVICE_ADDRESS}/api/techno/${uuid}`
+         `${process.env.MEDIA_SERVICE_ADDRESS}/api/techno/${uuid}`
      );
-     const techno = response.data.user;
+     const techno = response.data;
      return res.status(200).json({ techno });
  } catch (error) {
      if (error.response) {
@@ -41,4 +41,5 @@ const getTechnoUuid = async (req, res) => {
 
 module.exports = {
  getTechnosAll,
+ getTechnoUuid,
 }
